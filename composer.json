@@ -11,7 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-	"art-of-wifi/unifi-api-client": "^1.1"
+	    "art-of-wifi/unifi-api-client": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
