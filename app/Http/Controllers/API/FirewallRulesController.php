@@ -93,7 +93,7 @@ class FirewallRulesController extends Controller
          * initialize the Unifi API connection class, log in to the controller and request the alarms collection
          * (this example assumes you have already assigned the correct values to the variables used)
          */
-        $unifi_connection = new Unifi_Client($_ENV["UNIFI_USER"], $_ENV["UNIFI_PASS"], $_ENV["UNIFI_URI"], $_ENV["UNIFI_SITE"], $_ENV["UNIFI_VERSION"], false);
+        $unifi_connection = new Unifi_Client(env("UNIFI_USER"), env("UNIFI_PASS"), env("UNIFI_URI"), env("UNIFI_SITE"), env("UNIFI_VERSION"), false);
         $login            = $unifi_connection->login();
         $results          = $unifi_connection->list_firewallrules(); // returns a PHP array containing alarm objects
 
@@ -104,9 +104,9 @@ class FirewallRulesController extends Controller
     {
         $method = "GET";
 
-        $unifi_connection = new Unifi_Client($_ENV["UNIFI_USER"], $_ENV["UNIFI_PASS"], $_ENV["UNIFI_URI"], $_ENV["UNIFI_SITE"], $_ENV["UNIFI_VERSION"], false);
+        $unifi_connection = new Unifi_Client(env("UNIFI_USER"), env("UNIFI_PASS"), env("UNIFI_URI"), env("UNIFI_SITE"), env("UNIFI_VERSION"), false);
         $login            = $unifi_connection->login();
-        $results          = $unifi_connection->custom_api_request('/api/s/' . $_ENV["UNIFI_SITE"] . '/rest/firewallrule/' . $id, $method);
+        $results          = $unifi_connection->custom_api_request('/api/s/' . env("UNIFI_SITE") . '/rest/firewallrule/' . $id, $method);
 
         return $results;
     }
@@ -115,9 +115,9 @@ class FirewallRulesController extends Controller
     {
         $method = 'PUT';
 
-        $unifi_connection = new Unifi_Client($_ENV["UNIFI_USER"], $_ENV["UNIFI_PASS"], $_ENV["UNIFI_URI"], $_ENV["UNIFI_SITE"], $_ENV["UNIFI_VERSION"], false);
+        $unifi_connection = new Unifi_Client(env("UNIFI_USER"), env("UNIFI_PASS"), env("UNIFI_URI"), env("UNIFI_SITE"), env("UNIFI_VERSION"), false);
         $login            = $unifi_connection->login();
-        $results          = $unifi_connection->custom_api_request('/api/s/' . $_ENV["UNIFI_SITE"] . '/rest/firewallrule/' . $id, $method, $rule);
+        $results          = $unifi_connection->custom_api_request('/api/s/' . env("UNIFI_SITE") . '/rest/firewallrule/' . $id, $method, $rule);
 
         return $results;
 
