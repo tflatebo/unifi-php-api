@@ -16,6 +16,9 @@ class FirewallRulesController extends Controller
 
     public function __construct()
     {
+        // flush the cache before we start
+        Cache::flush();
+
         // Create a connection that can be reused
         $this->unifi_connection =
             new Unifi_Client(
@@ -27,10 +30,14 @@ class FirewallRulesController extends Controller
                 false
             );
 
+        // set debug if needed
+        //$this->unifi_connection->set_debug(true);
+
         // check if we have a cookie from a previous API call, if so, set it on the 
         // client and in the global PHP session
         if(Cache::has('unificookie'))
         {             
+            Log::debug("Cookie from cache: " . Cache::get('unificookie'));
             Log::debug("Setting cookie in client from cache in constructor");
 
             $this->unifi_connection->set_cookies(Cache::get('unificookie'));
@@ -52,7 +59,7 @@ class FirewallRulesController extends Controller
             Log::debug($this->unifi_connection->get_cookies());
 
             Log::debug("Store cookie in cache in constructor");
-            Cache::put('unificookie', $this->unifi_connection->get_cookies());
+            Cache::put('unificookie', $this->unifi_connection->get_cookies(), 5);
         }
     }
 
