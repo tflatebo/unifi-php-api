@@ -37,7 +37,7 @@ class FirewallRulesController extends Controller
         // client and in the global PHP session
         if(Cache::has('unificookie'))
         {             
-            Log::debug("Cookie from cache: " . Cache::get('unificookie'));
+            //Log::debug("Cookie from cache: " . Cache::get('unificookie'));
             Log::debug("Setting cookie in client from cache in constructor");
 
             $this->unifi_connection->set_cookies(Cache::get('unificookie'));
